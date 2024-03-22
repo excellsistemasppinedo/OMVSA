@@ -1,11 +1,11 @@
 $(function(){
     $("#mnuConsulta").click(function(){
         $.ajax({
-            url: 'pages\seleccionador.php',
+            url: 'pages/seleccionador.php',
             type: 'POST',
-            data: {"accion": "consulta_datos"},
+            data: {"accion": "consulta_tabla"},
             success: function(data){
-                $("#content").html(data);
+                $("#contenido").html(data);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log(textStatus, errorThrown);

@@ -1,6 +1,7 @@
 <!-- Usa Bootstrap 3.3.7 -->
 <?php
-    class _screen{
+    include 'datos.php';
+    class _screen extends _datos{
         #region Vitales
         public function _head(){
             $_lcCadena = <<<html
@@ -159,63 +160,76 @@
                                             </li>
                                         </ul>
                                     </nav>
-                                    
                                     <!-- Content page -->
                                     <div id="contenido">
 
                                     </div>
-
                                 </section>
                           html;
                           echo $lcCadena;
         }
 
         public function consulta_tabla(){
+            $sentencia = "SELECT * FROM ARTICULOS";
+            $resultado = $this->ejecutar(1,$sentencia);
+
             $lcCadena = <<<html
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button">Go!</button>
-                                            </span>
-                                            <input type="text" class="form-control" placeholder="Buscar para ...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" id="txtexistencia">
-                                        <input type="text" class="form-control" id="txtfucompra">
-                                    </div>
+                            <div class="container-fluid">
+                                <div class="page-header">
+                                    <h1 class="text-titles"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Tabla de  <small>Articulos</small></h1>
                                 </div>
+                                <p class="lead">Desde esta tabla usted podra llevar a cabo las consultas de las piezas automovilisticas, y al darle click podra tener la informacion necesaria en la cabecera!</p>
                             </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">ID</th>
-                                                        <th class="text-center">Articulo</th>
-                                                        <th class="text-center">Fecha Ultima Compra</th>
-                                                        <th class="text-center">Existe</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr data="articulo_id>
-                                                        <td class="text-center">1</td>
-                                                        <td class="text-center">Articulo 1</td>
-                                                        <td class="text-center">01/01/2016</td>
-                                                        <td class="text-center">10</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                            <div class="panel-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button">Go!</button>
+                                                </span>
+                                                <input type="text" class="form-control" placeholder="Buscar para ...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                                <input type="text" class="form-control" id="txtexistencia">
+                                        </div>
+                                        <div class="col-md-3">
+                                                <input type="text" class="form-control" id="txtfucompra">
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                           html;
-                           echo $lcCadena;
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">ID</th>
+                                                            <th class="text-center">Articulo</th>
+                                                            <th class="text-center">Fecha Ultima Compra</th>
+                                                            <th class="text-center">Existe</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data="articulo_id">
+                                                            <td class="text-center">1</td>
+                                                            <td class="text-center">Articulo 1</td>
+                                                            <td class="text-center">01/01/2016</td>
+                                                            <td class="text-center">10</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            html;
+                           return $lcCadena;
         }
 
         public function linea_tiempo(){
@@ -332,6 +346,7 @@
                         html;
             return $lcCadena;
         }
+
 
         #endregion
     }
