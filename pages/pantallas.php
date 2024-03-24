@@ -10,6 +10,7 @@
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
                     <link rel="stylesheet" href="./css/main.css">
+                    <link rel="stylesheet" href="./css/ovmsa.css">                    
                 </head>
                 html;
             return $_lcCadena;
@@ -170,9 +171,6 @@
         }
 
         public function consulta_tabla(){
-            $sentencia = "SELECT * FROM ARTICULOS";
-            $resultado = $this->ejecutar(1,$sentencia);
-
             $lcCadena = <<<html
                             <div class="container-fluid">
                                 <div class="page-header">
@@ -188,14 +186,14 @@
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button">Go!</button>
                                                 </span>
-                                                <input type="text" class="form-control" placeholder="Buscar para ...">
+                                                <input type="text" class="form-control" placeholder="Buscar para ..." id="txtbusqueda">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                                <input type="text" class="form-control" id="txtexistencia">
+                                                <input type="text" class="form-control" id="txtexistencia" disabled>
                                         </div>
                                         <div class="col-md-3">
-                                                <input type="text" class="form-control" id="txtfucompra">
+                                                <input type="text" class="form-control" id="txtfucompra" disabled>
                                         </div>
                                         </div>
                                     </div>
@@ -210,17 +208,10 @@
                                                             <th class="text-center">ID</th>
                                                             <th class="text-center">Articulo</th>
                                                             <th class="text-center">Fecha Ultima Compra</th>
-                                                            <th class="text-center">Existe</th>
+                                                            <th class="text-center">Uventa</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr data="articulo_id">
-                                                            <td class="text-center">1</td>
-                                                            <td class="text-center">Articulo 1</td>
-                                                            <td class="text-center">01/01/2016</td>
-                                                            <td class="text-center">10</td>
-                                                        </tr>
-                                                    </tbody>
+                                                    <tbody id="tab_articulos"></tbody>
                                                 </table>
                                             </div>
                                         </div>

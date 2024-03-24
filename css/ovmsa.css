@@ -1,0 +1,8 @@
+.table-responsive{
+    overflow-y: auto;
+    height: 40vh;
+}
+
+#boton_zoom{
+    margin-top: 0px;
+}

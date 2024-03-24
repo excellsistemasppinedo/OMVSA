@@ -1,6 +1,7 @@
 <?php
 	include "pages/pantallas.php";
-	$object = new _screen('127.0.0.1','3030','D:\OMVSA\OMVSA.FDB','SYSDBA','masterkey');
+	// $object = new _screen('localhost','3030','.\\Data\\OMVSA.FDB','SYSDBA','masterkey');
+	$object = new _screen('localhost','OMVSA','root','','3307');
 ?>
 <!DOCTYPE html>
 <html lang="es">
