@@ -21,13 +21,16 @@ function articulo(){
         var accion = "busqueda";
         var tparametro = {"cadena":cadena,
                           "accion": "busqueda"};
+        $("#loading-modal").modal("show");
         $.ajax({
             url: 'pages/seleccionador.php',
             type: 'POST',
             data: tparametro,
             success: function(data){
                 $("#tab_articulos").html(data);
+                $("#txtbusqueda").focus();
                 dv_datos();
+                $("#loading-modal").modal("hide");
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log(textStatus, errorThrown);
@@ -43,26 +46,27 @@ function dv_datos(){
     }
 }
 
-add
+
 function seleccion_datos(e){
     var idArticulo = $(e.currentTarget).closest("tr").data("id");
-    var accion = 'ubicar_id';
+    var accion = 'producto_modal';
 
     var tparametro = {"idArticulo":idArticulo,
                       "accion": accion};
-    $.ajax({
+    $.ajax({    
         url: 'pages/seleccionador.php',
         type: 'POST',
         data: tparametro,
-        success: function(data){
-            var datos = JSON.parse(data);
-            $("#txtexistencia").val(datos[0]["unidad_venta"]);
-            $("#txtfucompra").val(datos[0]["ultima"]);
+        success: function(res){
+            $("#formulario-modal").html(res);
+            $("#info-modal").modal("show");
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log(textStatus, errorThrown);
         },
     })
+
+
 }
     
 }

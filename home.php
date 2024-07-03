@@ -1,7 +1,8 @@
 <?php
+	require "pages/constante.php";
 	include "pages/pantallas.php";
 	// $object = new _screen('localhost','3030','.\\Data\\OMVSA.FDB','SYSDBA','masterkey');
-	$object = new _screen('localhost','OMVSA','root','','3307');
+	$object = new _screen(_SERVER,_DB,_USER,_PASSWORD,_PORT);
 ?>
 <!DOCTYPE html>
 <html lang="es">

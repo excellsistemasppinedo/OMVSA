@@ -1,54 +1,14 @@
 <?php
+ require_once 'constante.php';
  class _datos {
 #region firebird
-    //     public $host;
-    //     public $puerto;
-    //     public $ruta;
-    //     public $user;
-    //     public $clave;
 
-    //     public function __construct($host, $puerto, $ruta, $user, $clave){
-    //         $this->host = $host;
-    //         $this->puerto = $puerto;
-    //         $this->ruta = $ruta;
-    //         $this->user = $user;
-    //         $this->clave = $clave;
-    //     }
-
-    //     public function ejecutar($opc,$consulta){
-    //         $dsn="firebird:dbname=".$this->host."/".$this->puerto.":".$this->ruta;
-    //         try {
-    //             $cnx = new PDO($dsn, $this->user, $this->clave);               
-    //         }catch(PDOException $e){
-    //             echo 'Error: '. $e->getmessage();
-    //             return;
-    //         };
-
-
-    //         $resultado = $cnx->prepare($consulta);
-    //         $resultado->execute();
-    //         if ($opc == 0){
-    //             $arreglo = array("resultado"=>"100","consulta"=>"Transaccion ok",array());
-    //         }else{
-    //             $numRow = $resultado->rowCount();
-    //             if($numRow != 0){
-    //                 $arreglo = array("resultado"=>"200","consulta"=>"ConDatos",$resultado->fetchAll(\PDO::FETCH_ASSOC));
-    //             }else{
-    //                 $arreglo = array("resultado"=>"201","consulta"=>"SinDatos",array()); 
-    //             }
-    //         }
-    //         $resultado = null;
-    //         if ($arreglo['resultado']=="200"){
-    //             $arreglo=$arreglo[0];
-    //         }
-    //         return $arreglo;
-    // }
 #endregion
-    public $host;
-    public $user;
-    public $pwd;
-    public $db;
-    public $puerto;
+public $host;
+public $user;
+public $pwd;
+public $db;
+public $puerto;
 public function __construct($host, $db, $user, $pwd, $puerto){
     $this->host = $host;
     $this->user = $user;
@@ -57,61 +17,123 @@ public function __construct($host, $db, $user, $pwd, $puerto){
     $this->puerto = $puerto;
 }
 
-    public function ejecutar($opc, $cad, $db){
-        // $opc (1/0)-> Consulta / Transaccion
-        // $cad -> Consulta de Transact SQL
-        // $bdname -> Base de datos
-        
-        // Utilizacion de la topologia de conectividad PDO
 
-        // Resultados
-        // ----------
-        // 100 - Sin resultado operacion correcta
-        // 201 - No data
+public function ejecutar_MARIADB($opc, $cad, $db){
+    // $opc (1/0)-> Consulta / Transaccion
+    // $cad -> Consulta de Transact SQL
+    // $bdname -> Base de datos
+    
+    // Utilizacion de la topologia de conectividad PDO
 
-        if($db == ''){
-            $dsn = "mysql:host=".$this->host.";dbname=".$this->db.";port=".$this->puerto;
-        }else{
-            $dsn = "mysql:host=".$this->host.";dbname=".$db.";port=".$this->puerto;
-        };
+    // Resultados
+    // ----------
+    // 100 - Sin resultado operacion correcta
+    // 201 - No data
 
-        try {
-            $cnx = new \PDO($dsn, $this->user, $this->pwd);
-        }catch(\PDOException $e){
-            echo 'Error: '. $e->getmessage();
-        }
+    if($db == ''){
+        $dsn = "mysql:host=".$this->host.";dbname=".$this->db.";port=".$this->puerto;
+    }else{
+        $dsn = "mysql:host=".$this->host.";dbname=".$db.";port=".$this->puerto;
+    };
 
-        $resultado = $cnx->prepare($cad);
-        $resultado->execute();
-        if ($opc == 0){
-            $arreglo = array("resultado"=>"100","consulta"=>"Transaccion ok",array());
-        }else{
-            $numRow = $resultado->rowCount();
-            if($numRow != 0){
-                $arreglo = array("resultado"=>"200","consulta"=>"ConDatos",$resultado->fetchAll(\PDO::FETCH_ASSOC));
-            }else{
-                $arreglo = array("resultado"=>"201","consulta"=>"SinDatos",array()); 
-            }
-        }
-        $resultado = null;
-        if ($arreglo['resultado']=="200"){
-            $arreglo=$arreglo[0];
-        }
-        return $arreglo;
+    try {
+        $cnx = new \PDO($dsn, $this->user, $this->pwd);
+    }catch(\PDOException $e){
+        echo 'Error: '. $e->getmessage();
     }
 
+    $resultado = $cnx->prepare($cad);
+    $resultado->execute();
+    if ($opc == 0){
+        $arreglo = array("resultado"=>"100","consulta"=>"Transaccion ok",array());
+    }else{
+        $numRow = $resultado->rowCount();
+        if($numRow != 0){
+            $arreglo = array("resultado"=>"200","consulta"=>"ConDatos",$resultado->fetchAll(\PDO::FETCH_ASSOC));
+        }else{
+            $arreglo = array("resultado"=>"201","consulta"=>"SinDatos",array()); 
+        }
+    }
+    $resultado = null;
+    if ($arreglo['resultado']=="200"){
+        $arreglo=$arreglo[0];
+    }
+    return $arreglo;
+}
+
+public function ejecutar($opc, $cad, $db){
+    // Este ejecutar esta diseñado para FIREBIRD OJO OJO OJO OJO OJO OJO OJO OJOO OJO OJO
+    // $opc (1/0)-> Consulta / Transaccion
+    // $cad -> Consulta de Transact SQL
+    // $bdname -> Base de datos
+    
+    // Utilizacion de la topologia de conectividad PDO
+
+    // Resultados
+    // ----------
+    // 100 - Sin resultado operacion correcta
+    // 201 - No data
+
+    if($db == ''){
+        $dsn = "firebird:host=".$this->host.";dbname=".$this->db.";port=".$this->puerto.";charset=utf8";
+    }else{
+        $dsn = "firebird:host=".$this->host.";dbname=".$db.";port=".$this->puerto.";charset=utf8";
+    };
+
+    try {
+        $cnx = new \PDO($dsn, $this->user, $this->pwd);
+        $cnx->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    }catch(\PDOException $e){
+        echo 'Error: '. $e->getmessage();
+    }
+
+    $resultado = $cnx->prepare($cad);
+    $resultado->execute();
+    if ($opc == 0){
+        $arreglo = array("resultado"=>"100","consulta"=>"Transaccion ok",array());
+    }else{
+        $datos = $resultado->fetchAll(\PDO::FETCH_ASSOC);
+        $numRow = count($datos);
+        if($numRow != 0){
+            $arreglo = array("resultado"=>"200","consulta"=>"ConDatos",$datos);
+        }else{
+            $arreglo = array("resultado"=>"201","consulta"=>"SinDatos",array()); 
+        }
+    }
+    $resultado = null;
+    $cnx = null;
+    if ($arreglo['resultado']=="200"){
+        $arreglo=$arreglo[0];
+    }
+    return $arreglo;
+}
+
+
     public function contenido_tabla($p_filtro){
-    $sentencia = "call sp_articulos ('{$p_filtro}')";
+    if ($p_filtro == '') {
+        $p_filtro = 'null';
+    }
+    $sentencia = <<<sentencia
+                        SELECT a.articulo_id, 
+                        (SELECT clave_articulo FROM GET_CLAVE_ART(a.articulo_id, TRUE)) as clave,
+                        a.nombre as articulo, 
+                        b.nombre as linea, 
+                        Coalesce((SELECT VALOR_DESPLEGADO FROM LISTAS_ATRIBUTOS WHERE LISTA_ATRIB_ID=c.marca), '') as marca
+                    FROM articulos a
+                    INNER JOIN lineas_articulos b ON a.LINEA_ARTICULO_ID = b.LINEA_ARTICULO_ID
+                    INNER JOIN libres_articulos c ON a.articulo_id = c.articulo_id
+                    WHERE upper(a.nombre) CONTAINING '{$p_filtro}'
+                sentencia;
     $resultado = $this->ejecutar(1,$sentencia,'');
     $tabla_resultado = '';
     for ($i = 0; $i < count($resultado); $i++) {
-        if(array_key_exists('articulo_id',$resultado[$i])){
+        if(array_key_exists('ARTICULO_ID',$resultado[$i])){
             $tabla_resultado .= <<<tabla
-                                  <tr data-id={$resultado[$i]['articulo_id']}>
-                                    <td class="text-center">{$resultado[$i]['articulo_id']}</td>
-                                    <td class="text-center">{$resultado[$i]['nombre']}</td>
-                                    <td class="text-center">{$resultado[$i]['ultima_compra']}</td>
-                                    <td class="text-center">{$resultado[$i]['unidad_venta']}</td>
+                                  <tr data-id={$resultado[$i]['ARTICULO_ID']}>
+                                    <td class="text-center">{$resultado[$i]['ARTICULO_ID']}</td>
+                                    <td class="text-center">{$resultado[$i]['ARTICULO']}</td>
+                                    <td class="text-center">{$resultado[$i]['LINEA']}</td>
+                                    <td class="text-center">{$resultado[$i]['MARCA']}</td>
                                     <td><button class="btn btn-danger btn-sm btn-eliminar" id="boton_zoom"><i class="zmdi zmdi-zoom-in"></i></button></td><\td>
                                   </tr>
                                   tabla;
@@ -124,8 +146,29 @@ public function __construct($host, $db, $user, $pwd, $puerto){
     }
 
     public function mostrar_datos($p_id){
-        $sentencia = "call sp_campos_datos({$p_id})";
+        $sentencia = "execute procedure sp_campos_datos({$p_id})";
+        $resultado = $this->ejecutar(1,$sentencia,'');
+        return $resultado;
+    }
+
+    public function retrive_datos_modal($p_id){
+        $sentencia = <<<sentencia
+                            Select a.articulo_id,(SELECT clave_articulo as clave FROM GET_CLAVE_ART(a.articulo_id, TRUE)),
+                                a.nombre as articulo, b.nombre as linea, c.medida,
+                                Coalesce((Select VALOR_DESPLEGADO from LISTAS_ATRIBUTOS where LISTA_ATRIB_ID=c.marca),'') as marca,
+                                Coalesce((Select VALOR_DESPLEGADO from LISTAS_ATRIBUTOS where LISTA_ATRIB_ID=c.tipo_de_piso),'') as piso,
+                                (SELECT FIRST 1 PRECIO_TOTAL FROM RAB_PRECIO_ARTICULO Where articulo_id=a.articulo_id Order by FECHA_ULTIMA_LISTA desc),
+                                (SELECT EXISTENCIA as ex_torreon FROM EXIVAL_ART(a.articulo_id, 19, 'now', 'S')),
+                                (SELECT EXISTENCIA as ex_gomez FROM EXIVAL_ART(a.articulo_id, 54285, 'now', 'S')),
+                                d.imagen
+                            From articulos a
+                                Inner join lineas_articulos b on a.LINEA_ARTICULO_ID=b.LINEA_ARTICULO_ID
+                                Inner join libres_articulos c on a.articulo_id=c.articulo_id
+                                Left JOIN Imagenes_articulos d on a.ARTICULO_ID=d.ARTICULO_ID
+                            Where a.articulo_id = {$p_id}
+                        sentencia;
         $resultado = $this->ejecutar(1,$sentencia,'');
         return $resultado;
     }
 }
+

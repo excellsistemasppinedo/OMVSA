@@ -1,4 +1,4 @@
-<!-- Usa Bootstrap 3.3.7 -->
+
 <?php
     include 'datos.php';
     class _screen extends _datos{
@@ -68,7 +68,7 @@
                                     <div class="full-box dashboard-sideBar-ct">
                                         <!--SideBar Title -->
                                         <div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-                                            company <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+                                            OVM SA <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
                                         </div>
                                         <!-- SideBar User info -->
                                         <div class="full-box dashboard-sideBar-UserInfo">
@@ -97,7 +97,7 @@
                                         <!-- SideBar Menu -->
                                         <ul class="list-unstyled full-box dashboard-sideBar-Menu">
                                             <li>
-                                                <a href="home.html">
+                                                <a href="home.php">
                                                     <i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Bienvenido
                                                 </a>
                                             </li>
@@ -155,7 +155,7 @@
                                                 <a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
                                             </li>
                                             <li>
-                                                <a href="search.html" class="btn-search">
+                                                <a href="#" class="btn-search">
                                                     <i class="zmdi zmdi-search"></i>
                                                 </a>
                                             </li>
@@ -174,7 +174,7 @@
             $lcCadena = <<<html
                             <div class="container-fluid">
                                 <div class="page-header">
-                                    <h1 class="text-titles"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Tabla de  <small>Articulos</small></h1>
+                                    <h1 class="text-titles"><i class="zmdi zmdi-car zmdi-hc-fw"></i> Tabla de Articulos</h1>
                                 </div>
                                 <p class="lead">Desde esta tabla usted podra llevar a cabo las consultas de las piezas automovilisticas, y al darle click podra tener la informacion necesaria en la cabecera!</p>
                             </div>
@@ -183,18 +183,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group">
-                                                <span class="input-group-btn">
+                                            <!--    <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button">Go!</button>
-                                                </span>
+                                                </span> -->
                                                 <input type="text" class="form-control" placeholder="Buscar para ..." id="txtbusqueda">
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                                <input type="text" class="form-control" id="txtexistencia" disabled>
-                                        </div>
-                                        <div class="col-md-3">
-                                                <input type="text" class="form-control" id="txtfucompra" disabled>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -207,8 +200,8 @@
                                                         <tr>
                                                             <th class="text-center">ID</th>
                                                             <th class="text-center">Articulo</th>
-                                                            <th class="text-center">Fecha Ultima Compra</th>
-                                                            <th class="text-center">Uventa</th>
+                                                            <th class="text-center">Linea</th>
+                                                            <th class="text-center">Marca</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tab_articulos"></tbody>
@@ -218,9 +211,177 @@
                                     </div>
                                 </div>
                                 
-                                </div>
+                            </div>
+                            <div id="formulario-modal">
+                                {$this->formulario_consulta_modal(null)}
+                            </div>
+                            {$this->modal_wait()}
                             html;
                            return $lcCadena;
+        }
+
+        // public function formulario_consulta_modal($id){
+        //     if (!is_null($id)) {
+        //         $idArticulo = $id;     
+        //         $datos = $this->retrive_datos_modal($idArticulo);
+        //         $nombre =  $datos[0]['nombre'];
+        //     }else{
+        //         $idArticulo = null;
+        //         $nombre = '';
+        //     }
+        //     $lcCadena = <<<html
+        //         <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+        //             <div class="modal-dialog" role="document">
+        //                 <div class="modal-content">
+        //                     <div class="modal-header">
+        //                         <h5 class="modal-title" id="exampleModalLabel">Codigo : {$idArticulo}</h5>
+        //                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        //                             <span aria-hidden="true">&times;</span>
+        //                         </button>
+        //                     </div>
+        //                     <div class="modal-body">
+        //                         {$nombre}
+        //                         <div class="container">
+        //                             <table class="table">
+        //                                 <tr>
+        //                                     <td rowspan="4" class="align-middle">
+        //                                         <img src="assets/img/llanta.jpg" alt="user-picture" class="img-responsive img-fluid imagen-modal">    
+        //                                     </td>
+        //                                     <td>
+        //                                         <input type="text" class="form-control mb-2" id="txtid_articulo1" value="Campo de Concepto 1" disabled>
+        //                                     </td>
+        //                                 </tr>
+        //                                 <tr>
+        //                                     <td>
+        //                                         <input type="text" class="form-control mb-2" id="txtid_articulo2" value="Campo de Concepto 2" disabled>
+        //                                     </td>
+        //                                 </tr>
+        //                                 <tr>
+        //                                     <td>
+        //                                         <input type="text" class="form-control mb-2" id="txtid_articulo3" value="Campo de Concepto 3" disabled>
+        //                                     </td>
+        //                                 </tr>
+        //                                 <tr>
+        //                                     <td>
+        //                                         <input type="text" class="form-control mb-2" id="txtid_articulo4" value="Campo de Concepto 4" disabled>
+        //                                     </td>
+        //                                 </tr>
+        //                             </table>
+        //                         </div>
+        //                     </div>
+        //                     <div class="modal-footer">
+        //                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        //                     <button type="button" class="btn btn-primary">Save changes</button>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     html;
+        //     return $lcCadena;
+        // }
+
+        public function formulario_consulta_modal($id){
+            if (!is_null($id)) {
+                $idArticulo = $id;     
+                $datos = $this->retrive_datos_modal($idArticulo);
+                $nombre =  $datos[0]['ARTICULO'];
+                $marca =  $datos[0]['MARCA'];
+                $piso =  $datos[0]['PISO'];
+                $medida =  $datos[0]['MEDIDA'];
+                $ex_torreon =  number_format($datos[0]['EX_TORREON'],2,'.',',');
+                $ex_gomez =  number_format($datos[0]['EX_GOMEZ'],2,'.',',');
+                $precio =  number_format($datos[0]['PRECIO_TOTAL'],2,'.',',');
+                if($datos[0]["IMAGEN"]!=""){
+                    $imagen =  base64_encode($datos[0]['IMAGEN']);   
+                }else{
+                    $preimagen = file_get_contents("../assets/img/sinimagen.jpg");
+                    $imagen = base64_encode($preimagen);
+                }
+            } else {
+                $idArticulo = null;
+                $nombre = '';
+                $marca = '';
+                $piso = '';
+                $medida = '';
+                $ex_torreon = '';
+                $ex_gomez = '';
+                $precio = '';
+                $imagen = '';
+            }
+            $lcCadena = <<<html
+                <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Codigo : {$idArticulo}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-6 d-flex align-items-center justify-content-center img-container">
+                                            <img src="data:image/jpeg;base64,{$imagen}" alt="user-picture" class="img-fluid imagen-modal responsive-img">
+                                            <div class="nombre_titulo">
+                                                {$nombre}
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+
+                                                <label for="txtMarca" class="col-xs-5 control-label">Marca: </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" class="form-control" id="inputMarca" value="{$marca}">
+                                                </div>
+
+
+
+                                                <label for="txtPiso" class="col-xs-5 control-label">Piso: </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" class="form-control" id="inputPiso" value="{$piso}">
+                                                </div>
+
+
+                                            
+                                                <label for="txtMedida" class="col-xs-5 control-label">Medida: </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" class="form-control" id="inputMedida" value="{$medida}">
+                                                </div>
+                                            
+                                            
+                                            
+                                                <label for="txtTorreon" class="col-xs-5 control-label">Ex Torreon: </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" class="form-control" id="inputTorreon" value="{$ex_torreon}">
+                                                </div>
+                                            
+
+                                            <div class="form-group">
+                                                <label for="txtGierre" class="col-xs-5 control-label">Ex Gomez: </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" class="form-control" id="inputGierre" value="{$ex_gomez}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="txtPrecio" class="col-xs-5 control-label">Precio: </label>
+                                                <div class="col-xs-7">
+                                                    <input type="text" class="form-control" id="inputPrecio" value="{$precio}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            html;
+            return $lcCadena;
         }
 
         public function linea_tiempo(){
@@ -335,6 +496,21 @@
                                     </article>
                                 </div>
                         html;
+            return $lcCadena;
+        }
+
+        public function modal_wait(){
+            $lcCadena = <<<html
+                            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" data-backdrop="false" id="loading-modal">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="assets/img/loading.gif" class="img-responsive center-block loading-img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                           
+                           html;
             return $lcCadena;
         }
 

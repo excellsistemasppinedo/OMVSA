@@ -1,4 +1,5 @@
 <?php
+    require "constante.php";
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
@@ -13,7 +14,8 @@
     // $object = new _screen($servidor, $bd, $usuario, $clave, $puerto);
 
     // $object = new _screen('localhost','3030','.\\Data\\OMVSA.FDB','SYSDBA','masterkey');
-    $object = new _screen('localhost','omvsa','root','','3306');
+    //$object = new _screen('localhost','omvsa','root','','3306');
+    $object = new _screen(_SERVER,_DB,_USER,_PASSWORD,_PORT);
     if(isset($_POST['accion']) && !empty($_POST['accion'])){
         $accion = $_POST['accion'];
     }else{
@@ -23,6 +25,7 @@
 
     switch ($accion) {
         case 'consulta_tabla':
+            $id = 0;
             $pantalla = $object->consulta_tabla();
             echo $pantalla;
             break;
@@ -34,11 +37,20 @@
             break;
 
         case 'ubicar_id':
-            $id = $_POST['id'];
+            header('Content-Type: application/json');
+            $id = $_POST['idArticulo'];
             $valores = $object->mostrar_datos($id);
             $r=json_encode($valores);
             echo $r;
             break;
+
+        case 'producto_modal':
+            $id = $_POST['idArticulo'];
+            $modal = $object->formulario_consulta_modal($id);
+            echo $modal;
+            break;
+    
         }
+
 
 

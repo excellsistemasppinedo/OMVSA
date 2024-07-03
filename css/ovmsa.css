@@ -3,6 +3,87 @@
     height: 40vh;
 }
 
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+    position: sticky; /* Fijar el encabezado */
+    top: 0; /* Fijar en la parte superior */
+    z-index: 1; /* Asegurar que esté sobre el contenido del tbody */
+}
+
 #boton_zoom{
     margin-top: 0px;
+}
+
+.letras_resaltadas{
+    color:blue;
+    font-weight: bold;
+}
+
+.modal-header{
+    background-color :darkred;
+    color: white;
+}
+
+.modal-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.texto-derecha{
+    margin-top: 4vh;
+}
+
+.nombre_titulo{
+    margin-bottom: 2vh;
+}
+
+.loading-img{
+    width: 50%;
+    height: 50%;
+}
+
+#loading-modal{
+    margin-top: 15%;
+}
+
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-container {
+    max-width: 300px; /* Ajusta este valor según el tamaño deseado */
+    width: 100%;
+    overflow: hidden;
+}
+
+.input-group{
+    width:100%;
+    margin-bottom: 2vh;
+}
+
+
+@media (max-width: 600px) {
+    .img-container {
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .img-container {
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .img-container {
+        max-width: 50%;
+    }
 }
