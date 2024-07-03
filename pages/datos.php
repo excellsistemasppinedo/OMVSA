@@ -114,7 +114,7 @@ public function ejecutar($opc, $cad, $db){
         $p_filtro = 'null';
     }
     $sentencia = <<<sentencia
-                        SELECT a.articulo_id, 
+                    SELECT first 100 a.articulo_id, 
                         (SELECT clave_articulo FROM GET_CLAVE_ART(a.articulo_id, TRUE)) as clave,
                         a.nombre as articulo, 
                         b.nombre as linea, 
@@ -128,12 +128,16 @@ public function ejecutar($opc, $cad, $db){
     $tabla_resultado = '';
     for ($i = 0; $i < count($resultado); $i++) {
         if(array_key_exists('ARTICULO_ID',$resultado[$i])){
+            $articulo   = trim($resultado[$i]['ARTICULO']);
+            $linea      = trim($resultado[$i]['LINEA']);
+            $marca      = trim($resultado[$i]['MARCA']);
+
             $tabla_resultado .= <<<tabla
                                   <tr data-id={$resultado[$i]['ARTICULO_ID']}>
                                     <td class="text-center">{$resultado[$i]['ARTICULO_ID']}</td>
-                                    <td class="text-center">{$resultado[$i]['ARTICULO']}</td>
-                                    <td class="text-center">{$resultado[$i]['LINEA']}</td>
-                                    <td class="text-center">{$resultado[$i]['MARCA']}</td>
+                                    <td class="text-center">{$articulo}</td>
+                                    <td class="text-center">{$linea}</td>
+                                    <td class="text-center">{$marca}</td>
                                     <td><button class="btn btn-danger btn-sm btn-eliminar" id="boton_zoom"><i class="zmdi zmdi-zoom-in"></i></button></td><\td>
                                   </tr>
                                   tabla;

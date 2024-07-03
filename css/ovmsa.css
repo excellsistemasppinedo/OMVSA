@@ -1,13 +1,22 @@
-.table-responsive{
-    overflow-y: auto;
-    height: 40vh;
+@import url('https://fonts.cdnfonts.com/css/jaina-sans');
+
+.letra_titulo{
+    font-family: 'Jaina Sans', sans-serif;
 }
 
-th, td {
+.table-responsive{
+    overflow-y: auto;
+    height: 50vh;
+}
+
+.table th, .table td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
+/*   white-space: nowrap; /* Evita que el contenido se divida en varias líneas */
+/*    overflow: hidden; /* Oculta el desbordamiento del contenido */
 }
+
 th {
     background-color: #f2f2f2;
     position: sticky; /* Fijar el encabezado */
@@ -74,6 +83,21 @@ th {
     .img-container {
         max-width: 50%;
     }
+
+    .table-responsive{
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table th .table td{
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 50%;
+    }
+
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {

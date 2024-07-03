@@ -231,6 +231,9 @@ body, html{
 	border-left: 3px solid #F7F052;
 	color: #F7F052;
 }
+
+
+
 /*contentPage*/
 .dashboard-contentPage{
 	right: 0;
@@ -601,6 +604,9 @@ body, html{
 		padding-left: 0;
 	}
 }
+
+
+
 @media (min-width: 992px) and (max-width: 1199px){
 	.hide-sidebar{
 		pointer-events: none;

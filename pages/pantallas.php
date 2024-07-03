@@ -67,8 +67,8 @@
                                     <div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
                                     <div class="full-box dashboard-sideBar-ct">
                                         <!--SideBar Title -->
-                                        <div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-                                            OVM SA <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+                                        <div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title letra_titulo">
+                                            OMVSA <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
                                         </div>
                                         <!-- SideBar User info -->
                                         <div class="full-box dashboard-sideBar-UserInfo">
@@ -77,7 +77,7 @@
                                                 <figcaption class="text-center text-titles">User Name</figcaption>
                                             </figure>
                                             <ul class="full-box list-unstyled text-center">
-                                                <li>
+                                                <!--<li>
                                                     <a href="my-data.html" title="Mis datos">
                                                         <i class="zmdi zmdi-account-circle"></i>
                                                     </a>
@@ -86,7 +86,7 @@
                                                     <a href="my-account.html" title="Mi cuenta">
                                                         <i class="zmdi zmdi-settings"></i>
                                                     </a>
-                                                </li>
+                                                </li>-->
                                                 <li>
                                                     <a href="#!" title="Salir del sistema" class="btn-exit-system">
                                                         <i class="zmdi zmdi-power"></i>
@@ -107,7 +107,7 @@
                                                 </a>
                                                 <ul class="list-unstyled full-box">
                                                     <li id ="mnuConsulta">
-                                                        <a href="#"><i class="zmdi zmdi-balance zmdi-hc-fw"></i> Consulta</a>
+                                                        <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw"></i> Consulta</a>
                                                     </li>
                                                     <!--<li>
                                                         <a href="category.html"><i class="zmdi zmdi-labels zmdi-hc-fw"></i> Categorías</a>
@@ -155,9 +155,9 @@
                                                 <a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
                                             </li>
                                             <li>
-                                                <a href="#" class="btn-search">
+                                                <!--<a href="#" class="btn-search">
                                                     <i class="zmdi zmdi-search"></i>
-                                                </a>
+                                                </a>-->
                                             </li>
                                         </ul>
                                     </nav>
@@ -174,9 +174,9 @@
             $lcCadena = <<<html
                             <div class="container-fluid">
                                 <div class="page-header">
-                                    <h1 class="text-titles"><i class="zmdi zmdi-car zmdi-hc-fw"></i> Tabla de Articulos</h1>
+                                    <h1 class="text-titles"><i class="zmdi zmdi-album zmdi-hc-fw"></i>Artículos</h1>
                                 </div>
-                                <p class="lead">Desde esta tabla usted podra llevar a cabo las consultas de las piezas automovilisticas, y al darle click podra tener la informacion necesaria en la cabecera!</p>
+                                <!--<p class="lead">Desde esta tabla usted podra llevar a cabo las consultas de las piezas automovilisticas, y al darle click podra tener la informacion necesaria en la cabecera!</p>-->
                             </div>
                             <div class="panel-body">
                                 <div class="container-fluid">
@@ -202,6 +202,7 @@
                                                             <th class="text-center">Articulo</th>
                                                             <th class="text-center">Linea</th>
                                                             <th class="text-center">Marca</th>
+                                                            <th class="text-center">Ver</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tab_articulos"></tbody>
