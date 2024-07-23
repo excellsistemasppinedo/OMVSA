@@ -1,7 +1,8 @@
 @import url('https://fonts.cdnfonts.com/css/jaina-sans');
+@import url('https://fonts.cdnfonts.com/css/hahmlet');
 
 .letra_titulo{
-    font-family: 'Jaina Sans', sans-serif;
+    font-family: 'Hahmlet', sans-serif;                                          
 }
 
 .table-responsive{
@@ -76,6 +77,10 @@ th {
 .input-group{
     width:100%;
     margin-bottom: 2vh;
+}
+
+.large-icon{
+    font-size: 2em;
 }
 
 

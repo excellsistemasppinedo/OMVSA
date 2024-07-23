@@ -67,13 +67,13 @@
                                     <div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
                                     <div class="full-box dashboard-sideBar-ct">
                                         <!--SideBar Title -->
-                                        <div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title letra_titulo">
-                                            OMVSA <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+                                        <div class="full-box  text-center text-titles dashboard-sideBar-title letra_titulo">
+                                            RealCo <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
                                         </div>
                                         <!-- SideBar User info -->
                                         <div class="full-box dashboard-sideBar-UserInfo">
                                             <figure class="full-box">
-                                                <img src="./assets/avatars/AdminMaleAvatar.png" alt="UserIcon">
+                                                <img src="./assets/avatars/rs.png" alt="UserIcon">
                                                 <figcaption class="text-center text-titles">User Name</figcaption>
                                             </figure>
                                             <ul class="full-box list-unstyled text-center">
@@ -107,7 +107,7 @@
                                                 </a>
                                                 <ul class="list-unstyled full-box">
                                                     <li id ="mnuConsulta">
-                                                        <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw"></i> Consulta</a>
+                                                        <a href="#"><i class="zmdi zmdi-eye zmdi-hc-fw"></i> Articulos</a>
                                                     </li>
                                                     <!--<li>
                                                         <a href="category.html"><i class="zmdi zmdi-labels zmdi-hc-fw"></i> Categorías</a>
@@ -201,6 +201,7 @@
                                                             <th class="text-center">ID</th>
                                                             <th class="text-center">Articulo</th>
                                                             <th class="text-center">Linea</th>
+                                                            <th class="text-center">Piso</th>
                                                             <th class="text-center">Marca</th>
                                                             <th class="text-center">Ver</th>
                                                         </tr>

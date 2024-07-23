@@ -113,17 +113,34 @@ public function ejecutar($opc, $cad, $db){
     if ($p_filtro == '') {
         $p_filtro = 'null';
     }
+    //$sentencia = <<<sentencia
+                //     SELECT first 100 a.articulo_id, 
+                //         (SELECT clave_articulo FROM GET_CLAVE_ART(a.articulo_id, TRUE)) as clave,
+                //         a.nombre as articulo, 
+                //         b.nombre as linea, 
+                //         Coalesce((SELECT VALOR_DESPLEGADO FROM LISTAS_ATRIBUTOS WHERE LISTA_ATRIB_ID=c.marca), '') as marca
+                //     FROM articulos a
+                //     INNER JOIN lineas_articulos b ON a.LINEA_ARTICULO_ID = b.LINEA_ARTICULO_ID
+                //     INNER JOIN libres_articulos c ON a.articulo_id = c.articulo_id
+                //     WHERE upper(a.nombre) CONTAINING '{$p_filtro}'
+                // sentencia;
+
     $sentencia = <<<sentencia
-                    SELECT first 100 a.articulo_id, 
-                        (SELECT clave_articulo FROM GET_CLAVE_ART(a.articulo_id, TRUE)) as clave,
-                        a.nombre as articulo, 
-                        b.nombre as linea, 
-                        Coalesce((SELECT VALOR_DESPLEGADO FROM LISTAS_ATRIBUTOS WHERE LISTA_ATRIB_ID=c.marca), '') as marca
-                    FROM articulos a
-                    INNER JOIN lineas_articulos b ON a.LINEA_ARTICULO_ID = b.LINEA_ARTICULO_ID
-                    INNER JOIN libres_articulos c ON a.articulo_id = c.articulo_id
-                    WHERE upper(a.nombre) CONTAINING '{$p_filtro}'
+                        Select first 100 a.articulo_id,(SELECT clave_articulo as clave FROM GET_CLAVE_ART(a.articulo_id, TRUE)),
+                        a.nombre as articulo, b.nombre as linea, c.medida,
+                        Coalesce((Select VALOR_DESPLEGADO from LISTAS_ATRIBUTOS where LISTA_ATRIB_ID=c.marca),'') as marca,
+                        Coalesce((Select VALOR_DESPLEGADO from LISTAS_ATRIBUTOS where LISTA_ATRIB_ID=c.tipo_de_piso),'') as piso,
+                        (SELECT FIRST 1 PRECIO_TOTAL FROM RAB_PRECIO_ARTICULO Where articulo_id=a.articulo_id Order by FECHA_ULTIMA_LISTA desc),
+                        (SELECT EXISTENCIA as ex_torreon FROM EXIVAL_ART(a.articulo_id, 19, 'now', 'S')),
+                        (SELECT EXISTENCIA as ex_gomez FROM EXIVAL_ART(a.articulo_id, 54285, 'now', 'S')),
+                        d.imagen
+                        From articulos a
+                            Inner join lineas_articulos b on a.LINEA_ARTICULO_ID=b.LINEA_ARTICULO_ID
+                            Inner join libres_articulos c on a.articulo_id=c.articulo_id
+                            Left JOIN Imagenes_articulos d on a.ARTICULO_ID=d.ARTICULO_ID
+                        WHERE upper(a.nombre) CONTAINING '{$p_filtro}'
                 sentencia;
+    
     $resultado = $this->ejecutar(1,$sentencia,'');
     $tabla_resultado = '';
     for ($i = 0; $i < count($resultado); $i++) {
@@ -131,14 +148,16 @@ public function ejecutar($opc, $cad, $db){
             $articulo   = trim($resultado[$i]['ARTICULO']);
             $linea      = trim($resultado[$i]['LINEA']);
             $marca      = trim($resultado[$i]['MARCA']);
+            $piso      = trim($resultado[$i]['PISO']);
 
             $tabla_resultado .= <<<tabla
                                   <tr data-id={$resultado[$i]['ARTICULO_ID']}>
                                     <td class="text-center">{$resultado[$i]['ARTICULO_ID']}</td>
                                     <td class="text-center">{$articulo}</td>
                                     <td class="text-center">{$linea}</td>
+                                    <td class="text-center">{$piso}</td>
                                     <td class="text-center">{$marca}</td>
-                                    <td><button class="btn btn-danger btn-sm btn-eliminar" id="boton_zoom"><i class="zmdi zmdi-zoom-in"></i></button></td><\td>
+                                    <td><button class="btn btn-danger btn-sm btn-eliminar" id="boton_zoom"><i class="zmdi zmdi-image large-icon"></i></button></td><\td>
                                   </tr>
                                   tabla;
         }else{

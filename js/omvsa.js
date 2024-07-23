@@ -31,6 +31,7 @@ function articulo(){
                 $("#txtbusqueda").focus();
                 dv_datos();
                 $("#loading-modal").modal("hide");
+                $("#txtbusqueda").focus();
             },
             error: function(jqXHR, textStatus, errorThrown){
                 console.log(textStatus, errorThrown);
@@ -65,8 +66,6 @@ function seleccion_datos(e){
             console.log(textStatus, errorThrown);
         },
     })
-
-
 }
     
 }
