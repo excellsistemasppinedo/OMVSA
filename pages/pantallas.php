@@ -36,7 +36,6 @@
         #region Login
         public function login_body(){
             $_lcCadena = <<<html
-
                 <div class="full-box login-container cover">
                     <form action="home.php" method="" autocomplete="off" class="logInForm">
                         <p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
@@ -163,7 +162,6 @@
                                     </nav>
                                     <!-- Content page -->
                                     <div id="contenido">
-
                                     </div>
                                 </section>
                           html;
@@ -212,7 +210,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div id="formulario-modal">
                                 {$this->formulario_consulta_modal(null)}
@@ -330,48 +327,34 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
-
                                                 <label for="txtMarca" class="col-xs-5 control-label">Marca: </label>
                                                 <div class="col-xs-7">
                                                     <input type="text" class="form-control" id="inputMarca" value="{$marca}">
                                                 </div>
-
-
-
                                                 <label for="txtPiso" class="col-xs-5 control-label">Piso: </label>
                                                 <div class="col-xs-7">
                                                     <input type="text" class="form-control" id="inputPiso" value="{$piso}">
                                                 </div>
-
-
-                                            
                                                 <label for="txtMedida" class="col-xs-5 control-label">Medida: </label>
                                                 <div class="col-xs-7">
                                                     <input type="text" class="form-control" id="inputMedida" value="{$medida}">
                                                 </div>
-                                            
-                                            
-                                            
                                                 <label for="txtTorreon" class="col-xs-5 control-label">Ex Torreon: </label>
                                                 <div class="col-xs-7">
                                                     <input type="text" class="form-control" id="inputTorreon" value="{$ex_torreon}">
                                                 </div>
-                                            
-
                                             <div class="form-group">
                                                 <label for="txtGierre" class="col-xs-5 control-label">Ex Gomez: </label>
                                                 <div class="col-xs-7">
                                                     <input type="text" class="form-control" id="inputGierre" value="{$ex_gomez}">
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label for="txtPrecio" class="col-xs-5 control-label">Precio: </label>
                                                 <div class="col-xs-7">
                                                     <input type="text" class="form-control" id="inputPrecio" value="{$precio}">
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -446,9 +429,7 @@
                                         </div>
                                     </div>   
                                 </section>
-
                             </div>
-
                         html;
         }
         public function dashboard(){
@@ -515,7 +496,5 @@
                            html;
             return $lcCadena;
         }
-
-
         #endregion
     }
